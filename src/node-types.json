@@ -1,12 +1,16 @@
 [
   {
-    "type": "addr_bracket",
+    "type": "bracket_expr",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "address",
+          "named": true
+        },
         {
           "type": "cast",
           "named": true
@@ -32,7 +36,7 @@
           "named": true
         },
         {
-          "type": "variable",
+          "type": "symbol_ref",
           "named": true
         }
       ]
@@ -104,11 +108,15 @@
       "required": false,
       "types": [
         {
-          "type": "addr_bracket",
+          "type": "address",
           "named": true
         },
         {
-          "type": "address",
+          "type": "bracket_expr",
+          "named": true
+        },
+        {
+          "type": "char_literal",
           "named": true
         },
         {
@@ -124,7 +132,11 @@
           "named": true
         },
         {
-          "type": "variable",
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "symbol_ref",
           "named": true
         }
       ]
@@ -173,6 +185,37 @@
     }
   },
   {
+    "type": "local_label",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "local_label_ref",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "operands",
     "named": true,
     "fields": {},
@@ -181,15 +224,19 @@
       "required": true,
       "types": [
         {
-          "type": "addr_bracket",
-          "named": true
-        },
-        {
           "type": "address",
           "named": true
         },
         {
+          "type": "bracket_expr",
+          "named": true
+        },
+        {
           "type": "cast",
+          "named": true
+        },
+        {
+          "type": "char_literal",
           "named": true
         },
         {
@@ -198,6 +245,10 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "local_label_ref",
           "named": true
         },
         {
@@ -213,7 +264,11 @@
           "named": true
         },
         {
-          "type": "variable",
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "symbol_ref",
           "named": true
         }
       ]
@@ -244,7 +299,7 @@
           "named": true
         },
         {
-          "type": "variable",
+          "type": "symbol_ref",
           "named": true
         }
       ]
@@ -291,6 +346,10 @@
           "named": true
         },
         {
+          "type": "local_label",
+          "named": true
+        },
+        {
           "type": "newline",
           "named": true
         }
@@ -298,7 +357,7 @@
     }
   },
   {
-    "type": "variable",
+    "type": "symbol_ref",
     "named": true,
     "fields": {},
     "children": {
@@ -311,10 +370,6 @@
         }
       ]
     }
-  },
-  {
-    "type": "!",
-    "named": false
   },
   {
     "type": "&",
@@ -353,6 +408,10 @@
     "named": false
   },
   {
+    "type": "@",
+    "named": false
+  },
+  {
     "type": "[",
     "named": false
   },
@@ -362,6 +421,10 @@
   },
   {
     "type": "address",
+    "named": true
+  },
+  {
+    "type": "char_literal",
     "named": true
   },
   {
@@ -399,6 +462,10 @@
   },
   {
     "type": "register",
+    "named": true
+  },
+  {
+    "type": "string_literal",
     "named": true
   },
   {

@@ -11,7 +11,7 @@ mov &[ <Word> MEM.ptr ], &4002
     (instruction
       (mnemonic)
       (operands
-        (addr_bracket
+        (bracket_expr
           (cast
             (identifier)
             (identifier)
@@ -21,7 +21,7 @@ mov &[ <Word> MEM.ptr ], &4002
     (instruction
       (mnemonic)
       (operands
-        (addr_bracket
+        (bracket_expr
           (cast
             (identifier)
             (identifier)

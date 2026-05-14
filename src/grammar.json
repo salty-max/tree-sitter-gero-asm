@@ -94,6 +94,10 @@
       "members": [
         {
           "type": "SYMBOL",
+          "name": "local_label"
+        },
+        {
+          "type": "SYMBOL",
           "name": "label"
         },
         {
@@ -136,6 +140,27 @@
     "label": {
       "type": "SEQ",
       "members": [
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        }
+      ]
+    },
+    "local_label": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "."
+        },
         {
           "type": "FIELD",
           "name": "name",
@@ -210,6 +235,26 @@
           {
             "type": "STRING",
             "value": "struct"
+          },
+          {
+            "type": "STRING",
+            "value": "org"
+          },
+          {
+            "type": "STRING",
+            "value": "bank"
+          },
+          {
+            "type": "STRING",
+            "value": "sram_banks"
+          },
+          {
+            "type": "STRING",
+            "value": "reserve"
+          },
+          {
+            "type": "STRING",
+            "value": "include"
           }
         ]
       }
@@ -223,7 +268,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "variable"
+          "name": "symbol_ref"
         },
         {
           "type": "SYMBOL",
@@ -235,7 +280,15 @@
         },
         {
           "type": "SYMBOL",
-          "name": "addr_bracket"
+          "name": "bracket_expr"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "char_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "string_literal"
         },
         {
           "type": "STRING",
@@ -303,11 +356,11 @@
           },
           {
             "type": "STRING",
-            "value": "lmov"
+            "value": "movh"
           },
           {
             "type": "STRING",
-            "value": "hmov"
+            "value": "movl"
           },
           {
             "type": "STRING",
@@ -323,7 +376,15 @@
           },
           {
             "type": "STRING",
+            "value": "adc"
+          },
+          {
+            "type": "STRING",
             "value": "sub"
+          },
+          {
+            "type": "STRING",
+            "value": "sbc"
           },
           {
             "type": "STRING",
@@ -331,11 +392,15 @@
           },
           {
             "type": "STRING",
-            "value": "neg"
+            "value": "div"
           },
           {
             "type": "STRING",
-            "value": "not"
+            "value": "divs"
+          },
+          {
+            "type": "STRING",
+            "value": "neg"
           },
           {
             "type": "STRING",
@@ -344,10 +409,6 @@
           {
             "type": "STRING",
             "value": "dec"
-          },
-          {
-            "type": "STRING",
-            "value": "swp"
           },
           {
             "type": "STRING",
@@ -363,11 +424,43 @@
           },
           {
             "type": "STRING",
-            "value": "lsh"
+            "value": "not"
           },
           {
             "type": "STRING",
-            "value": "rsh"
+            "value": "shl"
+          },
+          {
+            "type": "STRING",
+            "value": "shr"
+          },
+          {
+            "type": "STRING",
+            "value": "rol"
+          },
+          {
+            "type": "STRING",
+            "value": "ror"
+          },
+          {
+            "type": "STRING",
+            "value": "cmp"
+          },
+          {
+            "type": "STRING",
+            "value": "tst"
+          },
+          {
+            "type": "STRING",
+            "value": "bset"
+          },
+          {
+            "type": "STRING",
+            "value": "swap"
+          },
+          {
+            "type": "STRING",
+            "value": "bcpy"
           },
           {
             "type": "STRING",
@@ -407,11 +500,59 @@
           },
           {
             "type": "STRING",
+            "value": "jcc"
+          },
+          {
+            "type": "STRING",
+            "value": "jcs"
+          },
+          {
+            "type": "STRING",
+            "value": "jvc"
+          },
+          {
+            "type": "STRING",
+            "value": "jvs"
+          },
+          {
+            "type": "STRING",
+            "value": "jr"
+          },
+          {
+            "type": "STRING",
+            "value": "djnz"
+          },
+          {
+            "type": "STRING",
             "value": "call"
           },
           {
             "type": "STRING",
             "value": "ret"
+          },
+          {
+            "type": "STRING",
+            "value": "clc"
+          },
+          {
+            "type": "STRING",
+            "value": "sec"
+          },
+          {
+            "type": "STRING",
+            "value": "cli"
+          },
+          {
+            "type": "STRING",
+            "value": "sei"
+          },
+          {
+            "type": "STRING",
+            "value": "clv"
+          },
+          {
+            "type": "STRING",
+            "value": "nop"
           },
           {
             "type": "STRING",
@@ -474,7 +615,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "addr_bracket"
+          "name": "bracket_expr"
         },
         {
           "type": "SYMBOL",
@@ -482,7 +623,19 @@
         },
         {
           "type": "SYMBOL",
-          "name": "variable"
+          "name": "symbol_ref"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "local_label_ref"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "char_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "string_literal"
         },
         {
           "type": "SYMBOL",
@@ -491,6 +644,19 @@
         {
           "type": "SYMBOL",
           "name": "cast"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        }
+      ]
+    },
+    "local_label_ref": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "."
         },
         {
           "type": "SYMBOL",
@@ -530,18 +696,97 @@
         ]
       }
     },
-    "variable": {
+    "symbol_ref": {
       "type": "SEQ",
       "members": [
         {
           "type": "STRING",
-          "value": "!"
+          "value": "@"
         },
         {
           "type": "SYMBOL",
           "name": "identifier"
         }
       ]
+    },
+    "char_literal": {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "'"
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "[^'\\\\\\n]"
+              },
+              {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": "\\"
+                  },
+                  {
+                    "type": "PATTERN",
+                    "value": "[nrt0'\\\\\"]"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "STRING",
+            "value": "'"
+          }
+        ]
+      }
+    },
+    "string_literal": {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "\""
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "PATTERN",
+                  "value": "[^\"\\\\\\n]"
+                },
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": "\\"
+                    },
+                    {
+                      "type": "PATTERN",
+                      "value": "[nrt0'\\\\\"]"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "type": "STRING",
+            "value": "\""
+          }
+        ]
+      }
     },
     "register": {
       "type": "TOKEN",
@@ -658,7 +903,7 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "variable"
+                "name": "symbol_ref"
               },
               {
                 "type": "SYMBOL",
@@ -681,12 +926,20 @@
         }
       ]
     },
-    "addr_bracket": {
+    "bracket_expr": {
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "&"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "&"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "STRING",
@@ -703,15 +956,19 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "variable"
+                "name": "address"
               },
               {
                 "type": "SYMBOL",
-                "name": "identifier"
+                "name": "symbol_ref"
               },
               {
                 "type": "SYMBOL",
                 "name": "register"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "identifier"
               },
               {
                 "type": "SYMBOL",
