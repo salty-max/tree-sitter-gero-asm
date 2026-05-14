@@ -2,10 +2,10 @@
 bracketed addressing & arithmetic
 =================================
 
-mov &[!FROG], &2020
-mov &[!FROG + $02], &2022
+mov &[@FROG], &2020
+mov &[@FROG + $02], &2022
 ; nested parens / ops
-mov &[ ( !FROG ) + ( $0004 * $42 ) ], &3030
+mov &[ ( @FROG ) + ( $0004 * $42 ) ], &3030
 
 ---
 (source_file
@@ -13,16 +13,16 @@ mov &[ ( !FROG ) + ( $0004 * $42 ) ], &3030
     (instruction
       (mnemonic)
       (operands
-        (addr_bracket
-          (variable
+        (bracket_expr
+          (symbol_ref
             (identifier)))
         (address)))
     (newline)
     (instruction
       (mnemonic)
       (operands
-        (addr_bracket
-          (variable
+        (bracket_expr
+          (symbol_ref
             (identifier))
           (operator)
           (hex_number))
@@ -33,9 +33,9 @@ mov &[ ( !FROG ) + ( $0004 * $42 ) ], &3030
     (instruction
       (mnemonic)
       (operands
-        (addr_bracket
+        (bracket_expr
           (paren_expr
-            (variable
+            (symbol_ref
               (identifier)))
           (operator)
           (paren_expr
@@ -43,4 +43,33 @@ mov &[ ( !FROG ) + ( $0004 * $42 ) ], &3030
             (operator)
             (hex_number)))
         (address)))
+    (newline))
+
+=================================
+indexed addressing without `&`
+=================================
+
+mov8 [@GREETING + r3], r1
+mov [r1 + $04], r2
+
+---
+(source_file
+  (newline)
+    (instruction
+      (mnemonic)
+      (operands
+        (bracket_expr
+          (symbol_ref (identifier))
+          (operator)
+          (register))
+        (register)))
+    (newline)
+    (instruction
+      (mnemonic)
+      (operands
+        (bracket_expr
+          (register)
+          (operator)
+          (hex_number))
+        (register)))
     (newline))

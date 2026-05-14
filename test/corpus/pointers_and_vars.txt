@@ -1,11 +1,11 @@
 ====================================
-register pointer & variable operands
+register pointer & symbol-ref operands
 ====================================
 
 mov &r1, r2
 mov r3, &r4
-mov !FROG, r1
-mov r2, !FROG
+mov @FROG, r1
+mov r2, @FROG
 
 ---
 (source_file
@@ -27,7 +27,7 @@ mov r2, !FROG
     (instruction
       (mnemonic)
       (operands
-        (variable
+        (symbol_ref
           (identifier))
         (register)))
     (newline)
@@ -35,6 +35,6 @@ mov r2, !FROG
       (mnemonic)
       (operands
         (register)
-        (variable
+        (symbol_ref
           (identifier))))
     (newline))

@@ -4,8 +4,8 @@ isa mnemonics only
 
 mov r1, r2
 mov8 $ff, r3
-lmov r4, &2020
-hmov r5, &2022
+movl r4, &2020
+movh r5, &2022
 add $0004, r1
 sub r2, $0001
 xor r1, r2

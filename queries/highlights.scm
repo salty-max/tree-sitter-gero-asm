@@ -3,6 +3,8 @@
 
 ; -------- Labels --------
 (label (identifier) @label)
+(local_label (identifier) @label)
+(local_label "." @punctuation.special)
 
 ; -------- Directives --------
 (directive keyword: (directive_keyword) @keyword)
@@ -19,15 +21,17 @@
 ; -------- Literals --------
 (hex_number) @number
 (address) @number
+(char_literal) @character
+(string_literal) @string
 
-; -------- Address bracket expressions (&[ ... ]) --------
-(addr_bracket "&" @operator)
-(addr_bracket "[" @punctuation.bracket)
-(addr_bracket "]" @punctuation.bracket)
+; -------- Bracketed address expressions ([ ... ] / &[ ... ]) --------
+(bracket_expr "&" @operator)
+(bracket_expr "[" @punctuation.bracket)
+(bracket_expr "]" @punctuation.bracket)
 
-; -------- Variables (!IDENT) --------
-(variable "!" @operator)
-(variable (identifier) @constant)
+; -------- Symbol references (@IDENT) --------
+(symbol_ref "@" @operator)
+(symbol_ref (identifier) @constant)
 
 ; -------- Operators --------
 (operator) @operator
@@ -39,8 +43,3 @@
 (cast type: (identifier) @type)
 (cast object: (identifier) @variable)
 (cast property: (identifier) @property)
-
-; -------- Fallbacks (keep last, minimal) --------
-; Don’t over-highlight everything as variable; prefer plain identifier.
-; Uncomment if you want a very light fallback:
-; (identifier) @variable

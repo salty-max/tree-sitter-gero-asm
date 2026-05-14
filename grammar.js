@@ -30,7 +30,8 @@ module.exports = grammar({
     newline: (_) => /[\r]?\n/,
 
     // Statements
-    _statement: ($) => choice($.label, $.directive, $.instruction),
+    _statement: ($) =>
+      choice($.local_label, $.label, $.directive, $.instruction),
 
     // Comments: semicolon to end-of-line (do NOT eat the newline)
     comment: (_) => token(seq(';', /[^\n\r]*/)),
@@ -38,8 +39,12 @@ module.exports = grammar({
     // Identifiers
     identifier: (_) => token(prec(-1, /[A-Za-z_][A-Za-z0-9_]*/)),
 
-    // Labels like: start:
+    // Global labels like: start:
     label: ($) => seq(field('name', $.identifier), ':'),
+
+    // Local labels like: .loop:  — leading dot binds to the most
+    // recent global label at codegen time.
+    local_label: ($) => seq('.', field('name', $.identifier), ':'),
 
     // ------------------------------------------------------------
     // Directives (e.g. "const INPUT = $2620", "data8 hasFrameEnded = { $00 }")
@@ -55,15 +60,29 @@ module.exports = grammar({
     export_marker: (_) => '+',
 
     directive_keyword: (_) =>
-      token(choice('const', 'data8', 'data16', 'struct')),
+      token(
+        choice(
+          'const',
+          'data8',
+          'data16',
+          'struct',
+          'org',
+          'bank',
+          'sram_banks',
+          'reserve',
+          'include'
+        )
+      ),
 
     _dir_tail: ($) =>
       choice(
         $.identifier,
-        $.variable,
+        $.symbol_ref,
         $.hex_number,
         $.address,
-        $.addr_bracket,
+        $.bracket_expr,
+        $.char_literal,
+        $.string_literal,
         '{',
         '}',
         ',',
@@ -78,33 +97,47 @@ module.exports = grammar({
     instruction: ($) =>
       seq(field('mnemonic', $.mnemonic), optional($.operands)),
 
-    // Only legal mnemonics from the ISA (from your RAW_OPCODES keywords)
+    // Only legal mnemonics from the ISA — kept in sync with
+    // gero's `src/asm/opcode_resolver.zig` (v0.1-final).
     mnemonic: (_) =>
       token(
         choice(
           // moves
           'mov',
           'mov8',
-          'lmov',
-          'hmov',
+          'movh',
+          'movl',
           // stack
           'push',
           'pop',
-          // ALU
+          // ALU — arithmetic
           'add',
+          'adc',
           'sub',
+          'sbc',
           'mul',
+          'div',
+          'divs',
           'neg',
-          'not',
           'inc',
           'dec',
-          'swp',
+          // ALU — bitwise / shift
           'and',
           'or',
           'xor',
-          'lsh',
-          'rsh',
-          // jumps/branches
+          'not',
+          'shl',
+          'shr',
+          'rol',
+          'ror',
+          // compare / test / bit
+          'cmp',
+          'tst',
+          'bset',
+          // misc data
+          'swap',
+          'bcpy',
+          // jumps & branches
           'jmp',
           'jeq',
           'jne',
@@ -114,10 +147,23 @@ module.exports = grammar({
           'jge',
           'jz',
           'jnz',
-          // calls/ret
+          'jcc',
+          'jcs',
+          'jvc',
+          'jvs',
+          'jr',
+          'djnz',
+          // calls / ret
           'call',
           'ret',
+          // flag control
+          'clc',
+          'sec',
+          'cli',
+          'sei',
+          'clv',
           // interrupts & misc
+          'nop',
           'int',
           'rti',
           'brk',
@@ -132,13 +178,21 @@ module.exports = grammar({
         $.register_ptr, // &r1
         $.register, // r1, ip, acu, ...
         $.address, // &ABCD (immediate address literal)
-        $.addr_bracket, // &[ ...expr... ]
+        $.bracket_expr, // [@SYM + reg], [&ABCD], [reg], ...
         $.hex_number, // $FFFF
-        $.variable, // !SYMBOL
+        $.symbol_ref, // @SYMBOL
+        $.local_label_ref, // .loop (jump target inside the same global block)
+        $.char_literal, // 'A'
+        $.string_literal, // "Hello, gero!"
         $.paren_expr, // ( ... )
         $.cast, // <Type> obj.prop
-        $.identifier // plain symbol
+        $.identifier // plain symbol (used in data refs, etc.)
       ),
+
+    // `.foo` as an operand — references the most recently defined
+    // local label (one of `<global>.foo:`). Distinct from the
+    // `local_label` definition rule which trails with `:`.
+    local_label_ref: ($) => seq('.', $.identifier),
 
     // ------------------------------------------------------------
     // Tokens / primaries
@@ -146,8 +200,20 @@ module.exports = grammar({
     hex_number: (_) => token(seq('$', /[0-9A-Fa-f]{1,4}/)),
     address: (_) => token(seq('&', /[0-9A-Fa-f]{1,4}/)),
 
-    // Bang-prefixed symbol (no token() because it nests a rule)
-    variable: ($) => seq('!', $.identifier),
+    // `@`-prefixed symbol reference — the v0.1-final asm syntax.
+    // (Earlier grammar drafts used `!`; that's gone.)
+    symbol_ref: ($) => seq('@', $.identifier),
+
+    // Single-quoted single character literal (also accepts simple
+    // escapes for newline / null / backslash / quote). Used in
+    // operand position as an imm8: `mov 'A', r1`.
+    char_literal: (_) =>
+      token(seq("'", choice(/[^'\\\n]/, seq('\\', /[nrt0'\\"]/)), "'")),
+
+    // Double-quoted string literal — used in `data8 SYM = "...", $00`
+    // bodies. Same simple escapes as char_literal.
+    string_literal: (_) =>
+      token(seq('"', repeat(choice(/[^"\\\n]/, seq('\\', /[nrt0'\\"]/))), '"')),
 
     // Register names (static list)
     register: (_) =>
@@ -183,7 +249,7 @@ module.exports = grammar({
         repeat(
           choice(
             $.hex_number,
-            $.variable,
+            $.symbol_ref,
             $.identifier,
             $.operator,
             $.paren_expr
@@ -192,17 +258,21 @@ module.exports = grammar({
         ')'
       ),
 
-    // Address expression: &[ ... ]
-    addr_bracket: ($) =>
+    // Bracketed addressing expression — covers indirect-via-reg
+    // (`[r1]`), indirect-via-symbol (`[@SYM]`), and indexed forms
+    // (`[@SYM + r3]`, `[&ABCD + r1]`). The optional `&` prefix is
+    // preserved for backward compat with the older `&[...]` form.
+    bracket_expr: ($) =>
       seq(
-        '&',
+        optional('&'),
         '[',
         repeat(
           choice(
             $.hex_number,
-            $.variable,
-            $.identifier,
+            $.address,
+            $.symbol_ref,
             $.register,
+            $.identifier,
             $.operator,
             $.paren_expr,
             $.cast

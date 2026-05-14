@@ -1,0 +1,83 @@
+============
+local labels
+============
+
+main:
+  jmp .loop
+.loop:
+  hlt
+
+---
+(source_file
+  (newline)
+  (label
+    (identifier))
+  (newline)
+  (instruction
+    (mnemonic)
+    (operands (local_label_ref (identifier))))
+  (newline)
+  (local_label
+    (identifier))
+  (newline)
+  (instruction (mnemonic))
+  (newline))
+
+================
+character literal
+================
+
+mov '0', r1
+mov 'A', r2
+
+---
+(source_file
+  (newline)
+  (instruction
+    (mnemonic)
+    (operands (char_literal) (register)))
+  (newline)
+  (instruction
+    (mnemonic)
+    (operands (char_literal) (register)))
+  (newline))
+
+=========================
+data8 with string literal
+=========================
+
+data8 GREETING = "Hello, gero!", $00
+
+---
+(source_file
+  (newline)
+  (directive
+    (directive_keyword)
+    (identifier)
+    (string_literal)
+    (hex_number))
+  (newline))
+
+==================
+sram + org + reserve
+==================
+
+sram_banks $01
+org $1000
+reserve $20
+
+---
+(source_file
+  (newline)
+  (directive
+    (directive_keyword)
+    (hex_number))
+  (newline)
+  (directive
+    (directive_keyword)
+    (hex_number))
+  (newline)
+  (directive
+    (directive_keyword)
+    (hex_number))
+  (newline))
