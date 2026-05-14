@@ -31,7 +31,7 @@ module.exports = grammar({
 
     // Statements
     _statement: ($) =>
-      choice($.local_label, $.label, $.directive, $.instruction),
+      choice($.local_label, $.label, $.struct_directive, $.directive, $.instruction),
 
     // Comments: semicolon to end-of-line (do NOT eat the newline)
     comment: (_) => token(seq(';', /[^\n\r]*/)),
@@ -65,13 +65,38 @@ module.exports = grammar({
           'const',
           'data8',
           'data16',
-          'struct',
           'org',
           'bank',
           'sram_banks',
           'reserve',
           'include'
         )
+      ),
+
+    // -- struct directive -----------------------------------
+    //
+    // `struct` is its own statement type rather than a generic
+    // `directive` flavor because the body spans multiple lines —
+    // gero's parser tolerates field separators of `,`, newlines,
+    // or both. Fields are `<name>: <type>` where `<type>` is the
+    // identifier `u8` or `u16` (semantic check happens in the
+    // gero parser; tree-sitter just accepts any identifier).
+    struct_directive: ($) =>
+      seq(
+        field('keyword', $.struct_keyword),
+        field('name', $.identifier),
+        '{',
+        repeat(choice($.struct_field, $.newline, ',')),
+        '}'
+      ),
+
+    struct_keyword: (_) => 'struct',
+
+    struct_field: ($) =>
+      seq(
+        field('name', $.identifier),
+        ':',
+        field('type', $.identifier)
       ),
 
     _dir_tail: ($) =>
