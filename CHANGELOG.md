@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.2 — 2026-05-14
+
+`struct` directive parses as its own statement type, with proper multi-line body support matching gero's parser.
+
+- `struct Name { … }` is no longer a generic `directive` — it's a top-level `struct_directive` rule with `name` / `type` fields per entry and newlines / commas as field separators
+- Field shape is now correctly typed: `<name>: <type>` where `<type>` is the identifier `u8` or `u16` (tree-sitter just checks the shape; gero's parser does the semantic check)
+- Highlights: `struct_keyword` → `@keyword`, struct name → `@type`, field name → `@property`, field type → `@type.builtin`
+- Multi-line corpus test added covering both single-line and multi-line struct forms
+
 ## 0.1.1 — 2026-05-14
 
 Bugfix patch — discovered during pre-`nvim-treesitter` verification.
