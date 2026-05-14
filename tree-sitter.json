@@ -5,12 +5,16 @@
       "name": "gero_asm",
       "camelcase": "GeroAsm",
       "scope": "source.gero_asm",
-      "file-types": ["asm", "gtx", "gasm"],
-      "path": "."
+      "file-types": ["gas"],
+      "path": ".",
+      "highlights": ["queries/highlights.scm"],
+      "injections": [],
+      "locals": [],
+      "tags": []
     }
   ],
   "metadata": {
-    "version": "0.1.0",
+    "version": "0.1.1",
     "license": "MIT",
     "description": "Parser for the Gero VM assembly language",
     "authors": [

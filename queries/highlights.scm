@@ -5,6 +5,8 @@
 (label (identifier) @label)
 (local_label (identifier) @label)
 (local_label "." @punctuation.special)
+(local_label_ref (identifier) @label)
+(local_label_ref "." @punctuation.special)
 
 ; -------- Directives --------
 (directive keyword: (directive_keyword) @keyword)
