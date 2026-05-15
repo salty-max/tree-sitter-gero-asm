@@ -14,7 +14,7 @@
     }
   ],
   "metadata": {
-    "version": "0.2.1",
+    "version": "0.3.0",
     "license": "MIT",
     "description": "Parser for the Gero VM assembly language",
     "authors": [

@@ -1,0 +1,85 @@
+============================
+bit ops (btest/bset/bclr)
+============================
+
+btest r1, $03
+bset r1, $03
+bclr r1, $03
+
+---
+(source_file
+  (newline)
+  (instruction
+    (mnemonic)
+    (operands (register) (hex_number)))
+  (newline)
+  (instruction
+    (mnemonic)
+    (operands (register) (hex_number)))
+  (newline)
+  (instruction
+    (mnemonic)
+    (operands (register) (hex_number)))
+  (newline))
+
+============================
+sign-extension and asr
+============================
+
+sext r1
+asr r1, $04
+
+---
+(source_file
+  (newline)
+  (instruction
+    (mnemonic)
+    (operands (register)))
+  (newline)
+  (instruction
+    (mnemonic)
+    (operands (register) (hex_number)))
+  (newline))
+
+============================
+bfill (renamed from bset memset)
+============================
+
+bfill &2000, $FF, $0010
+
+---
+(source_file
+  (newline)
+  (instruction
+    (mnemonic)
+    (operands (address) (hex_number) (hex_number)))
+  (newline))
+
+============================
+[reg + imm] stack-frame addressing
+============================
+
+mov [fp + $04], r1
+mov r2, [fp + $06]
+
+---
+(source_file
+  (newline)
+  (instruction
+    (mnemonic)
+    (operands
+      (bracket_expr
+        (register)
+        (operator)
+        (hex_number))
+      (register)))
+  (newline)
+  (instruction
+    (mnemonic)
+    (operands
+      (register)
+      (bracket_expr
+        (register)
+        (operator)
+        (hex_number))))
+  (newline))

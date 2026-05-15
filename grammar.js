@@ -162,6 +162,7 @@ module.exports = grammar({
           'neg',
           'inc',
           'dec',
+          'sext',
           // ALU — bitwise / shift
           'and',
           'or',
@@ -169,15 +170,20 @@ module.exports = grammar({
           'not',
           'shl',
           'shr',
+          'asr',
           'rol',
           'ror',
-          // compare / test / bit
+          // compare / test
           'cmp',
           'tst',
+          // single-bit ops
+          'btest',
           'bset',
+          'bclr',
           // misc data
           'swap',
           'bcpy',
+          'bfill',
           // jumps & branches
           'jmp',
           'jeq',

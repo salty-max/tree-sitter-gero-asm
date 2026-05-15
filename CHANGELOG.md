@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.3.0 — 2026-05-15
+
+Mnemonic-list sync for the ISA completion sprint — pairs with [salty-max/gero#186](https://github.com/salty-max/gero/pull/186).
+
+- `sext` — sign-extension opcode (single-operand, used by signed-integer codegen). Added to the arithmetic group of the `mnemonic` choice list.
+- `asr` — arithmetic shift right (preserves the sign bit). Sits next to `shl` / `shr` / `rol` / `ror` in the shift group.
+- `btest` / `bset` / `bclr` — single-bit ops on a register at a 1-byte immediate index. `bset` was already in the mnemonic list (formerly the `bset memset` semantics) and keeps its slot; the resolver disambiguates by operand shape.
+- `bfill` — renamed from the previous `bset memset` form. Three-operand fill-with-byte primitive (address, byte, length).
+- Stack-frame addressing `[reg + imm]` (e.g. `[fp + $04]`) already parsed via `bracket_expr`; new corpus test pins the shape.
+- New corpus file `v0_3_features.txt` covers all four feature families above.
+
+Minor bump (not patch) — the mnemonic literal-set grew by five (one renamed) and the corpus pins a new addressing form that downstream consumers may want to highlight differently.
+
 ## 0.2.1 — 2026-05-15
 
 Mnemonic-list completion — pairs with [salty-max/gero#179](https://github.com/salty-max/gero/pull/179).

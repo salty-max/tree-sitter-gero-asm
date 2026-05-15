@@ -528,6 +528,10 @@
           },
           {
             "type": "STRING",
+            "value": "sext"
+          },
+          {
+            "type": "STRING",
             "value": "and"
           },
           {
@@ -552,6 +556,10 @@
           },
           {
             "type": "STRING",
+            "value": "asr"
+          },
+          {
+            "type": "STRING",
             "value": "rol"
           },
           {
@@ -568,7 +576,15 @@
           },
           {
             "type": "STRING",
+            "value": "btest"
+          },
+          {
+            "type": "STRING",
             "value": "bset"
+          },
+          {
+            "type": "STRING",
+            "value": "bclr"
           },
           {
             "type": "STRING",
@@ -577,6 +593,10 @@
           {
             "type": "STRING",
             "value": "bcpy"
+          },
+          {
+            "type": "STRING",
+            "value": "bfill"
           },
           {
             "type": "STRING",
