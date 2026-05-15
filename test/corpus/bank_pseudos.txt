@@ -1,0 +1,18 @@
+==========================
+bank_call / bank_jump pseudos
+==========================
+
+bank_call greet
+bank_jump cleanup
+
+---
+(source_file
+  (newline)
+    (instruction
+      (mnemonic)
+      (operands (identifier)))
+    (newline)
+    (instruction
+      (mnemonic)
+      (operands (identifier)))
+    (newline))

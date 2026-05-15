@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-gero-asm",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Parser for the Gero VM assembly language",
   "repository": "https://github.com/salty-max/gero_2.0/packages/asm-grammar",
   "license": "MIT",

@@ -197,6 +197,9 @@ module.exports = grammar({
           // calls / ret
           'call',
           'ret',
+          // cross-bank pseudo-instructions (desugar to mov $bank, mb + call/jmp)
+          'bank_call',
+          'bank_jump',
           // flag control
           'clc',
           'sec',

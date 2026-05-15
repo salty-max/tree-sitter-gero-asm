@@ -1014,7 +1014,7 @@ static bool ts_lex_keywords(TSLexer *lexer, TSStateId state) {
       if (lookahead == 'r') ADVANCE(45);
       END_STATE();
     case 65:
-      if (lookahead == 'k') ADVANCE(78);
+      if (lookahead == 'k') ADVANCE(84);
       END_STATE();
     case 66:
       if (lookahead == 'y') ADVANCE(45);
@@ -1026,10 +1026,10 @@ static bool ts_lex_keywords(TSLexer *lexer, TSStateId state) {
       if (lookahead == 'l') ADVANCE(45);
       END_STATE();
     case 69:
-      if (lookahead == 's') ADVANCE(84);
+      if (lookahead == 's') ADVANCE(85);
       END_STATE();
     case 70:
-      if (lookahead == 'a') ADVANCE(85);
+      if (lookahead == 'a') ADVANCE(86);
       END_STATE();
     case 71:
       ACCEPT_TOKEN(sym_mnemonic);
@@ -1039,17 +1039,17 @@ static bool ts_lex_keywords(TSLexer *lexer, TSStateId state) {
       if (lookahead == 'z') ADVANCE(45);
       END_STATE();
     case 73:
-      if (lookahead == 'i') ADVANCE(86);
+      if (lookahead == 'i') ADVANCE(87);
       END_STATE();
     case 74:
-      if (lookahead == 'e') ADVANCE(87);
+      if (lookahead == 'e') ADVANCE(88);
       END_STATE();
     case 75:
-      if (lookahead == 'd') ADVANCE(88);
+      if (lookahead == 'd') ADVANCE(89);
       END_STATE();
     case 76:
       ACCEPT_TOKEN(sym_mnemonic);
-      if (lookahead == 'l') ADVANCE(89);
+      if (lookahead == 'l') ADVANCE(90);
       END_STATE();
     case 77:
       ACCEPT_TOKEN(sym_mnemonic);
@@ -1064,88 +1064,114 @@ static bool ts_lex_keywords(TSLexer *lexer, TSStateId state) {
       if (lookahead == 'h') ADVANCE(45);
       END_STATE();
     case 80:
-      if (lookahead == 'e') ADVANCE(90);
+      if (lookahead == 'e') ADVANCE(91);
       END_STATE();
     case 81:
-      if (lookahead == 'm') ADVANCE(91);
+      if (lookahead == 'm') ADVANCE(92);
       END_STATE();
     case 82:
-      if (lookahead == 'u') ADVANCE(92);
+      if (lookahead == 'u') ADVANCE(93);
       END_STATE();
     case 83:
       if (lookahead == 'p') ADVANCE(45);
       END_STATE();
     case 84:
-      if (lookahead == 't') ADVANCE(78);
+      ACCEPT_TOKEN(sym_directive_keyword);
+      if (lookahead == '_') ADVANCE(94);
       END_STATE();
     case 85:
-      if (lookahead == '1') ADVANCE(93);
-      if (lookahead == '8') ADVANCE(78);
+      if (lookahead == 't') ADVANCE(78);
       END_STATE();
     case 86:
-      if (lookahead == 'f') ADVANCE(94);
+      if (lookahead == '1') ADVANCE(95);
+      if (lookahead == '8') ADVANCE(78);
       END_STATE();
     case 87:
-      if (lookahead == 'f') ADVANCE(95);
+      if (lookahead == 'f') ADVANCE(96);
       END_STATE();
     case 88:
-      if (lookahead == 'e') ADVANCE(96);
+      if (lookahead == 'f') ADVANCE(97);
       END_STATE();
     case 89:
-      if (lookahead == 'u') ADVANCE(97);
+      if (lookahead == 'e') ADVANCE(98);
       END_STATE();
     case 90:
-      if (lookahead == 'r') ADVANCE(98);
+      if (lookahead == 'u') ADVANCE(99);
       END_STATE();
     case 91:
-      if (lookahead == '_') ADVANCE(99);
+      if (lookahead == 'r') ADVANCE(100);
       END_STATE();
     case 92:
-      if (lookahead == 'c') ADVANCE(100);
+      if (lookahead == '_') ADVANCE(101);
       END_STATE();
     case 93:
-      if (lookahead == '6') ADVANCE(78);
+      if (lookahead == 'c') ADVANCE(102);
       END_STATE();
     case 94:
-      ACCEPT_TOKEN(sym_conditional_close_keyword);
+      if (lookahead == 'c') ADVANCE(103);
+      if (lookahead == 'j') ADVANCE(104);
       END_STATE();
     case 95:
-      ACCEPT_TOKEN(sym_conditional_open_keyword);
+      if (lookahead == '6') ADVANCE(78);
       END_STATE();
     case 96:
-      if (lookahead == 'f') ADVANCE(95);
+      ACCEPT_TOKEN(sym_conditional_close_keyword);
       END_STATE();
     case 97:
-      if (lookahead == 'd') ADVANCE(101);
+      ACCEPT_TOKEN(sym_conditional_open_keyword);
       END_STATE();
     case 98:
-      if (lookahead == 'v') ADVANCE(102);
+      if (lookahead == 'f') ADVANCE(97);
       END_STATE();
     case 99:
-      if (lookahead == 'b') ADVANCE(103);
+      if (lookahead == 'd') ADVANCE(105);
       END_STATE();
     case 100:
-      if (lookahead == 't') ADVANCE(104);
+      if (lookahead == 'v') ADVANCE(106);
       END_STATE();
     case 101:
-      if (lookahead == 'e') ADVANCE(78);
+      if (lookahead == 'b') ADVANCE(107);
       END_STATE();
     case 102:
-      if (lookahead == 'e') ADVANCE(78);
+      if (lookahead == 't') ADVANCE(108);
       END_STATE();
     case 103:
-      if (lookahead == 'a') ADVANCE(105);
+      if (lookahead == 'a') ADVANCE(109);
       END_STATE();
     case 104:
-      ACCEPT_TOKEN(sym_struct_keyword);
+      if (lookahead == 'u') ADVANCE(110);
       END_STATE();
     case 105:
-      if (lookahead == 'n') ADVANCE(106);
+      if (lookahead == 'e') ADVANCE(78);
       END_STATE();
     case 106:
-      if (lookahead == 'k') ADVANCE(107);
+      if (lookahead == 'e') ADVANCE(78);
       END_STATE();
     case 107:
+      if (lookahead == 'a') ADVANCE(111);
+      END_STATE();
+    case 108:
+      ACCEPT_TOKEN(sym_struct_keyword);
+      END_STATE();
+    case 109:
+      if (lookahead == 'l') ADVANCE(112);
+      END_STATE();
+    case 110:
+      if (lookahead == 'm') ADVANCE(113);
+      END_STATE();
+    case 111:
+      if (lookahead == 'n') ADVANCE(114);
+      END_STATE();
+    case 112:
+      if (lookahead == 'l') ADVANCE(45);
+      END_STATE();
+    case 113:
+      if (lookahead == 'p') ADVANCE(45);
+      END_STATE();
+    case 114:
+      if (lookahead == 'k') ADVANCE(115);
+      END_STATE();
+    case 115:
       if (lookahead == 's') ADVANCE(78);
       END_STATE();
     default:
@@ -1780,28 +1806,28 @@ static const uint16_t ts_small_parse_table[] = {
       sym_paren_expr,
       aux_sym_paren_expr_repeat1,
   [618] = 2,
-    ACTIONS(179), 2,
+    ACTIONS(179), 3,
       sym_identifier,
+      sym_directive_keyword,
       sym_mnemonic,
-    ACTIONS(177), 8,
+    ACTIONS(177), 7,
       ts_builtin_sym_end,
       sym_newline,
       sym_comment,
       anon_sym_DOT,
-      sym_directive_keyword,
       sym_struct_keyword,
       sym_conditional_open_keyword,
       sym_conditional_close_keyword,
   [633] = 2,
-    ACTIONS(183), 2,
+    ACTIONS(183), 3,
       sym_identifier,
+      sym_directive_keyword,
       sym_mnemonic,
-    ACTIONS(181), 8,
+    ACTIONS(181), 7,
       ts_builtin_sym_end,
       sym_newline,
       sym_comment,
       anon_sym_DOT,
-      sym_directive_keyword,
       sym_struct_keyword,
       sym_conditional_open_keyword,
       sym_conditional_close_keyword,
@@ -2273,7 +2299,7 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [9] = {.entry = {.count = 1, .reusable = true}}, SHIFT(6),
   [11] = {.entry = {.count = 1, .reusable = true}}, SHIFT(50),
   [13] = {.entry = {.count = 1, .reusable = true}}, SHIFT(74),
-  [15] = {.entry = {.count = 1, .reusable = true}}, SHIFT(3),
+  [15] = {.entry = {.count = 1, .reusable = false}}, SHIFT(3),
   [17] = {.entry = {.count = 1, .reusable = true}}, SHIFT(68),
   [19] = {.entry = {.count = 1, .reusable = true}}, SHIFT(55),
   [21] = {.entry = {.count = 1, .reusable = true}}, SHIFT(44),
@@ -2304,7 +2330,7 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [76] = {.entry = {.count = 2, .reusable = true}}, REDUCE(aux_sym_source_file_repeat1, 2, 0, 0), SHIFT_REPEAT(7),
   [79] = {.entry = {.count = 2, .reusable = true}}, REDUCE(aux_sym_source_file_repeat1, 2, 0, 0), SHIFT_REPEAT(60),
   [82] = {.entry = {.count = 2, .reusable = true}}, REDUCE(aux_sym_source_file_repeat1, 2, 0, 0), SHIFT_REPEAT(74),
-  [85] = {.entry = {.count = 2, .reusable = true}}, REDUCE(aux_sym_source_file_repeat1, 2, 0, 0), SHIFT_REPEAT(3),
+  [85] = {.entry = {.count = 2, .reusable = false}}, REDUCE(aux_sym_source_file_repeat1, 2, 0, 0), SHIFT_REPEAT(3),
   [88] = {.entry = {.count = 2, .reusable = true}}, REDUCE(aux_sym_source_file_repeat1, 2, 0, 0), SHIFT_REPEAT(68),
   [91] = {.entry = {.count = 2, .reusable = true}}, REDUCE(aux_sym_source_file_repeat1, 2, 0, 0), SHIFT_REPEAT(55),
   [94] = {.entry = {.count = 2, .reusable = true}}, REDUCE(aux_sym_source_file_repeat1, 2, 0, 0), SHIFT_REPEAT(44),
@@ -2457,8 +2483,8 @@ TS_PUBLIC const TSLanguage *tree_sitter_gero_asm(void) {
     .max_reserved_word_set_size = 0,
     .metadata = {
       .major_version = 0,
-      .minor_version = 1,
-      .patch_version = 3,
+      .minor_version = 2,
+      .patch_version = 0,
     },
   };
   return &language;

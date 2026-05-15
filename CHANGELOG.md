@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.1 — 2026-05-15
+
+Mnemonic-list completion — pairs with [salty-max/gero#179](https://github.com/salty-max/gero/pull/179).
+
+- `bank_call` and `bank_jump` added to the `mnemonic` choice list. Both are cross-bank pseudo-instructions in the gero asm — they desugar at assembly time to `mov $bank, mb` + `call`/`jmp <addr>`. The grammar treats them like any other one-operand mnemonic; the actual desugaring happens in the assembler.
+- New corpus test `bank_pseudos.txt` confirming both parse as `(instruction (mnemonic) (operands (identifier)))`.
+
+Patch bump (not minor) — the grammar shape is unchanged, just the literal-set in the `mnemonic` token grew.
+
 ## 0.2.0 — 2026-05-15
 
 Conditional assembly directives — pairs with [salty-max/gero#177](https://github.com/salty-max/gero/pull/177).
