@@ -648,6 +648,14 @@
           },
           {
             "type": "STRING",
+            "value": "bank_call"
+          },
+          {
+            "type": "STRING",
+            "value": "bank_jump"
+          },
+          {
+            "type": "STRING",
             "value": "clc"
           },
           {
