@@ -79,6 +79,36 @@
     }
   },
   {
+    "type": "conditional_directive",
+    "named": true,
+    "fields": {
+      "keyword": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "conditional_close_keyword",
+            "named": true
+          },
+          {
+            "type": "conditional_open_keyword",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "directive",
     "named": true,
     "fields": {
@@ -305,6 +335,10 @@
           "named": true
         },
         {
+          "type": "conditional_directive",
+          "named": true
+        },
+        {
           "type": "directive",
           "named": true
         },
@@ -472,6 +506,14 @@
     "type": "comment",
     "named": true,
     "extra": true
+  },
+  {
+    "type": "conditional_close_keyword",
+    "named": true
+  },
+  {
+    "type": "conditional_open_keyword",
+    "named": true
   },
   {
     "type": "directive_keyword",

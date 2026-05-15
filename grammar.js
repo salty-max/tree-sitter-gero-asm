@@ -31,7 +31,7 @@ module.exports = grammar({
 
     // Statements
     _statement: ($) =>
-      choice($.local_label, $.label, $.struct_directive, $.directive, $.instruction),
+      choice($.local_label, $.label, $.struct_directive, $.conditional_directive, $.directive, $.instruction),
 
     // Comments: semicolon to end-of-line (do NOT eat the newline)
     comment: (_) => token(seq(';', /[^\n\r]*/)),
@@ -94,6 +94,26 @@ module.exports = grammar({
         ':',
         field('type', $.identifier)
       ),
+
+    // -- conditional assembly -------------------------------
+    //
+    // NASM/ca65-style include-guard directives:
+    //
+    //   ifndef NAME ... endif
+    //   ifdef  NAME ... endif
+    //
+    // Modeled as its own statement type (separate from `directive`)
+    // so highlight queries can target the keyword with a distinct
+    // capture — preprocessor-style coloration ≠ value-declaration
+    // (`const`) coloration.
+    conditional_directive: ($) =>
+      choice(
+        seq(field('keyword', $.conditional_open_keyword), field('name', $.identifier)),
+        field('keyword', $.conditional_close_keyword)
+      ),
+
+    conditional_open_keyword: (_) => token(choice('ifdef', 'ifndef')),
+    conditional_close_keyword: (_) => 'endif',
 
     _dir_tail: ($) =>
       choice(
