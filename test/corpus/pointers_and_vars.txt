@@ -1,28 +1,12 @@
 ====================================
-register pointer & symbol-ref operands
+symbol-ref operands
 ====================================
 
-mov &r1, r2
-mov r3, &r4
 mov @FROG, r1
 mov r2, @FROG
 
 ---
 (source_file
-    (newline)
-    (instruction
-      (mnemonic)
-      (operands
-        (register_ptr
-          (register))
-        (register)))
-    (newline)
-    (instruction
-      (mnemonic)
-      (operands
-        (register)
-        (register_ptr
-          (register))))
     (newline)
     (instruction
       (mnemonic)

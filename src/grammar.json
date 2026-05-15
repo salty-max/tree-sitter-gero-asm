@@ -184,22 +184,6 @@
       "members": [
         {
           "type": "FIELD",
-          "name": "export",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "export_marker"
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
-          }
-        },
-        {
-          "type": "FIELD",
           "name": "keyword",
           "content": {
             "type": "SYMBOL",
@@ -214,10 +198,6 @@
           }
         }
       ]
-    },
-    "export_marker": {
-      "type": "STRING",
-      "value": "+"
     },
     "directive_keyword": {
       "type": "TOKEN",
@@ -681,10 +661,6 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "register_ptr"
-        },
-        {
-          "type": "SYMBOL",
           "name": "register"
         },
         {
@@ -929,19 +905,6 @@
           }
         ]
       }
-    },
-    "register_ptr": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "&"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "register"
-        }
-      ]
     },
     "operator": {
       "type": "TOKEN",

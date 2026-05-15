@@ -4,7 +4,7 @@ directives (const/data)
 
 const INPUT = $2620
 data8 hasFrameEnded = { $00 }
-+data16 FROG = &2020
+data16 FROG = &2020
 
 ---
 (source_file
@@ -20,7 +20,6 @@ data8 hasFrameEnded = { $00 }
       (hex_number))
     (newline)
     (directive
-      (export_marker)
       (directive_keyword)
       (identifier)
       (address))
