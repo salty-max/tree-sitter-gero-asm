@@ -1,0 +1,86 @@
+=======================
+ifndef + const + endif
+=======================
+
+ifndef HW_INCLUDED
+const HW_INCLUDED = $01
+endif
+
+---
+(source_file
+  (newline)
+    (conditional_directive
+      (conditional_open_keyword)
+      (identifier))
+    (newline)
+    (directive
+      (directive_keyword)
+      (identifier)
+      (hex_number))
+    (newline)
+    (conditional_directive
+      (conditional_close_keyword))
+    (newline))
+
+=======================
+ifdef on a defined name
+=======================
+
+const FLAG = $01
+ifdef FLAG
+const X = $42
+endif
+
+---
+(source_file
+  (newline)
+    (directive
+      (directive_keyword)
+      (identifier)
+      (hex_number))
+    (newline)
+    (conditional_directive
+      (conditional_open_keyword)
+      (identifier))
+    (newline)
+    (directive
+      (directive_keyword)
+      (identifier)
+      (hex_number))
+    (newline)
+    (conditional_directive
+      (conditional_close_keyword))
+    (newline))
+
+=======================
+nested ifdef inside ifndef
+=======================
+
+ifndef OUTER
+ifdef INNER
+const X = $11
+endif
+endif
+
+---
+(source_file
+  (newline)
+    (conditional_directive
+      (conditional_open_keyword)
+      (identifier))
+    (newline)
+    (conditional_directive
+      (conditional_open_keyword)
+      (identifier))
+    (newline)
+    (directive
+      (directive_keyword)
+      (identifier)
+      (hex_number))
+    (newline)
+    (conditional_directive
+      (conditional_close_keyword))
+    (newline)
+    (conditional_directive
+      (conditional_close_keyword))
+    (newline))

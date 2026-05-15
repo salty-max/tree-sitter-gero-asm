@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.2.0 — 2026-05-15
+
+Conditional assembly directives — pairs with [salty-max/gero#177](https://github.com/salty-max/gero/pull/177).
+
+- New `conditional_directive` node covering `ifdef NAME` / `ifndef NAME` / `endif`. Modeled as its own statement type (separate from `directive`) so highlight queries can target the keyword with a distinct capture — preprocessor-style coloration ≠ value-declaration coloration.
+- Two sub-rules: `conditional_open_keyword` (`ifdef` / `ifndef`) and `conditional_close_keyword` (`endif`).
+- Highlights: `(conditional_directive keyword: ...) @keyword.directive` + `(conditional_directive name: (identifier) @constant)` — gives the keyword preprocessor-style coloration in default Neovim themes and the guarded name the same coloration as other `const`-style references.
+- New corpus test file `conditional_assembly.txt` covering happy path, ifdef on defined names, and nested ifdef-inside-ifndef.
+
+Minor bump (not patch) because `_statement` grew a new alternative — downstream consumers using the syntax tree get a new node kind to switch on.
+
 ## 0.1.3 — 2026-05-15
 
 Drift fix — the grammar advertised two operand forms that the gero asm parser doesn't accept, surfaced while wiring `docs/examples/syntax_overview.gas` into gero's `check-examples` CI gate.

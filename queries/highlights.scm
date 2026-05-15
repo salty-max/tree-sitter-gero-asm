@@ -17,6 +17,14 @@
 (struct_field name: (identifier) @property)
 (struct_field type: (identifier) @type.builtin)
 
+; -------- Conditional assembly (ifdef / ifndef / endif) --------
+; Distinct capture from `directive` so editors color preprocessor-
+; style directives differently from value declarations (cf. C
+; `#ifdef` vs `const`).
+(conditional_directive keyword: (conditional_open_keyword) @keyword.directive)
+(conditional_directive keyword: (conditional_close_keyword) @keyword.directive)
+(conditional_directive name: (identifier) @constant)
+
 ; -------- Instructions / mnemonics --------
 (mnemonic) @keyword
 
