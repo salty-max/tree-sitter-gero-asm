@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.3 — 2026-05-15
+
+Drift fix — the grammar advertised two operand forms that the gero asm parser doesn't accept, surfaced while wiring `docs/examples/syntax_overview.gas` into gero's `check-examples` CI gate.
+
+- **`export_marker` (`+const NAME = ...`)** — removed. The asm parser rejects the leading `+` with `unrecognized statement`. The marker was a stub for an export/import linker model that's deliberately out of scope (the include + global-namespace tradition replaces it).
+- **`register_ptr` (`&r1`)** — removed. The asm parser rejects this form. `[r1]` is the supported indirect-via-register syntax; `&r1` was a tree-sitter-only artifact.
+- Highlight queries trimmed accordingly (no more `@attribute` capture for `export_marker`, no `&` operator on register pointers).
+- Corpus test `pointers_and_vars` retitled to `symbol-ref operands` and pared down to forms the gero asm actually accepts.
+
 ## 0.1.2 — 2026-05-14
 
 `struct` directive parses as its own statement type, with proper multi-line body support matching gero's parser.

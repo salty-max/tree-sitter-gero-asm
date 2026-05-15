@@ -10,7 +10,6 @@
 
 ; -------- Directives --------
 (directive keyword: (directive_keyword) @keyword)
-(directive export: (export_marker) @attribute)
 
 ; -------- Struct directive --------
 (struct_directive keyword: (struct_keyword) @keyword)
@@ -21,10 +20,8 @@
 ; -------- Instructions / mnemonics --------
 (mnemonic) @keyword
 
-; -------- Registers & register pointers --------
+; -------- Registers --------
 (register) @variable.builtin
-(register_ptr "&" @operator)
-(register_ptr (register) @variable.builtin)
 
 ; -------- Literals --------
 (hex_number) @number

@@ -48,16 +48,12 @@ module.exports = grammar({
 
     // ------------------------------------------------------------
     // Directives (e.g. "const INPUT = $2620", "data8 hasFrameEnded = { $00 }")
-    // Optional leading '+' export marker.
     // ------------------------------------------------------------
     directive: ($) =>
       seq(
-        field('export', optional($.export_marker)),
         field('keyword', $.directive_keyword),
         repeat($._dir_tail)
       ),
-
-    export_marker: (_) => '+',
 
     directive_keyword: (_) =>
       token(
@@ -200,7 +196,6 @@ module.exports = grammar({
 
     _operand: ($) =>
       choice(
-        $.register_ptr, // &r1
         $.register, // r1, ip, acu, ...
         $.address, // &ABCD (immediate address literal)
         $.bracket_expr, // [@SYM + reg], [&ABCD], [reg], ...
@@ -260,9 +255,6 @@ module.exports = grammar({
           'im'
         )
       ),
-
-    // Pointer to register (e.g., &r1)
-    register_ptr: ($) => seq('&', $.register),
 
     // Simple operators used in expressions
     operator: (_) => token(choice('+', '-', '*')),
