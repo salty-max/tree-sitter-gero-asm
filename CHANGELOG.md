@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.3.1
+
+Ships the prebuilt grammar browser consumers need.
+
+- `.github/workflows/release.yml` builds `tree-sitter-gero_asm.wasm` on
+  tag, smoke-tests that it loads and parses, and attaches it to the
+  release. Four releases shipped without one, so `web-tree-sitter`
+  could not load this grammar at all.
+- `tree-sitter-cli` moves to `^0.27.0`, whose wasm build uses a
+  downloaded WASI SDK rather than emscripten in docker. The
+  regenerated parser passes the corpus unchanged.
+
 ## 0.3.0 — 2026-05-15
 
 Mnemonic-list sync for the ISA completion sprint — pairs with [salty-max/gero#186](https://github.com/salty-max/gero/pull/186).
